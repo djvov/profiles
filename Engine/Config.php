@@ -22,10 +22,10 @@ class Config
         self::$dir_tpl_relative = str_replace($_SERVER['DOCUMENT_ROOT'], '', self::$dir_tpl);
         self::$dsn = [
             'type' => 'mysql',
-            'host' => 'a84228.mysql.mchost.ru',
-            'db_name' => 'a84228_djvovts3',
-            'user' => 'a84228_djvovts3',
-            'pass' => 'vbm34trw',
+            'host' => '',
+            'db_name' => '',
+            'user' => '',
+            'pass' => '',
         ];
     }
 }

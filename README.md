@@ -48,6 +48,7 @@ In the `\Engine\MVC\Profiles` folder there is model, view, and controller for pr
 
 # File structure
 
+```php
 root
 +- css
 |   - style.css
@@ -97,4 +98,4 @@ root
 |   - Config.php
 - .htacess
 - Index.php
-
+```

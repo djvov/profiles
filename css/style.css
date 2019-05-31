@@ -1,0 +1,111 @@
+.email,
+.phone > div {
+    position: relative;
+}
+.email-inp,
+.phone-inp {
+    display: block;
+}
+.email-del {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 10;
+}
+.emails .email:first-of-type .email-del,
+.phones .phone:first-of-type .email-del {
+    display: none;
+}
+.phones .phone,
+.emails .email {
+    border-bottom: #efefef 1px solid;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.email-main {
+    display: inline-block;
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    z-index: 10;
+}
+.phone .email-main {
+    right: 44px;
+    top: 10px;
+}
+.phone .email-del {
+    right: 24px;
+    top: 10px;
+}
+.email .email-main,
+.phone .email-main {
+    color: #ccc;
+}
+.email.main .email-main,
+.phone.main .email-main  {
+    color: #007bff;
+}
+.main-phone {
+    font-weight: bold;
+}
+@media (max-width: 1200px) {
+    .profiles-table {
+        font-size: 15px;
+    }
+}
+@media (max-width: 990px) {
+    .profiles-table {
+        font-size: 16px;
+    }
+    .profiles-table thead {
+        display: none;
+    }
+    .profiles-table .td-fio,
+    .profiles-table .td-mail {
+        display: inline-block;
+        width: 33%;
+    }
+    .profiles-table .td-phone {
+        display: inline-block;
+        width: 66%;
+    }
+    .profiles-table .td-edit {
+        display: inline-block;
+        width: 50%;
+    }
+}
+@media (max-width: 767px) {
+    .phone-inp {
+        margin: 0 0 10px 0;
+    }
+    .phones-table td {
+        font-size: 15px;
+    }
+    .profiles-table .td-fio,
+    .profiles-table .td-mail,
+    .profiles-table .td-phone {
+        display: block;
+        width: 100%;
+        font-size: 15px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    .buttons-edit {
+        position: fixed;
+        width: 100%;
+        height: 45px;
+        left: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.8);
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+    .buttons-edit > div:last-child {
+        padding-right: 0;
+    }
+}

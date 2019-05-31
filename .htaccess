@@ -1,0 +1,14 @@
+DirectoryIndex Index.php
+
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^.htaccess$ - [F]
+
+RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !\.(jpg|jpeg|gif|png|css|js|txt)$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /Index.php [NC,L,QSA]
+

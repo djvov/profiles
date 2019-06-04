@@ -62,8 +62,9 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <select class="form-control" name="phone_type[{$id}][{$phone['id']}]"  required="required">
+                                <option value="0"></option>
                                 {foreach from=$phone_types item=phone_type }
-                                    <option value="{$phone_type['id']}" {if $phone['phone_type']['id'] == $phone_type['id']}selected{/if}>{$phone_type['name']}</option>
+                                    <option value="{$phone_type['id']}" {if isset($phone['phone_type']['id']) && $phone['phone_type']['id'] == $phone_type['id']}selected{/if}>{$phone_type['name']}</option>
                                 {/foreach}
                             </select>
                         </div>
@@ -78,6 +79,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <select class="form-control" name="phone_type[0][add][]" required="required" >
+                            <option value="0"></option>
                             {foreach from=$phone_types item=phone_type }
                                 <option value="{$phone_type['id']}">{$phone_type['name']}</option>
                             {/foreach}

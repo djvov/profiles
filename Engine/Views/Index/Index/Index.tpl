@@ -37,7 +37,7 @@
                     {foreach from=$profile['phones'] item=phone}
                         <div class="row {if $phone['main']==1}main-phone{/if}">
                             <div class="col-7"><a href="tel:{$phone['phone']}">{$phone['phone']}</a></div>
-                            <div class="col-5 text-right">{$phone['phone_type']['name']}</div>
+                            <div class="col-5 text-right">{if isset($phone['phone_type']['name'])}{$phone['phone_type']['name']}{/if}</div>
                         </div>
                     {/foreach}
                 </td>

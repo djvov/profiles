@@ -22,20 +22,25 @@ class Phones
 
         if (isset(Router::$query['typeId']) && (int) Router::$query['typeId'] > 0) {
             $type_id = (int)Router::$query['typeId'];
-            $result1 = self::$db->query('UPDATE phone_types SET name = :name WHERE id = :id',
+            $result1 = self::$db->query(
+                'UPDATE phone_types SET name = :name WHERE id = :id',
                 [
                     ['name', Router::$query['typeName'][$type_id]],
                     ['id', $type_id]
-                ]);
+                ]
+            );
             if ($result1[1] > 0) {
                 $ret++;
             }
         }
 
         if (isset(Router::$query['typeId']) && (int) Router::$query['typeId'] == 0) {
-            $result1 = self::$db->insert('phone_types', [
+            $result1 = self::$db->insert(
+                'phone_types',
+                [
                     'name',
-                ], [
+                ],
+                [
                     Router::$query['typeName'][$type_id],
                 ]
             );
@@ -79,6 +84,7 @@ class Phones
             if ($result1[1] > 0) {
                 $ret++;
             }
+
             $result2 = self::$db->query('UPDATE phones SET phone_type_id = 0 WHERE phone_type_id = :phone_type_id', [['phone_type_id', $type_id]]);
             if ($result2[1] > 0) {
                 $ret++;

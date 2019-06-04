@@ -15,7 +15,6 @@ class Router
     use Singleton;
 
     private static $path_arr = [];
-    private static $path = '';
 
     public static $module_name = 'Index';
     public static $action_name = 'Index';
@@ -27,8 +26,6 @@ class Router
         ob_start();
 
         \djvov\Config::getInstance();
-
-        self::$path = $_SERVER['REQUEST_URI'];
 
         $uri = strtok($_SERVER['REQUEST_URI'], '?');
 

@@ -140,13 +140,15 @@ class Profiles
         if (isset(Router::$query['profileId']) && (int)Router::$query['profileId'] > 0) {
 
             $profile_id = (int)Router::$query['profileId'];
-            $result1 = self::$db->query('UPDATE profiles SET name = :name, surname = :surname, patronymic = :patronymic WHERE id = :id',
+            $result1 = self::$db->query(
+                'UPDATE profiles SET name = :name, surname = :surname, patronymic = :patronymic WHERE id = :id',
                 [
                     ['name', Router::$query['name'][$profile_id]],
                     ['surname', Router::$query['surname'][$profile_id]],
                     ['patronymic', Router::$query['patronymic'][$profile_id]],
                     ['id', $profile_id]
-                ]);
+                ]
+            );
             if ($result1[1] > 0) {
                 $ret++;
             }
@@ -154,11 +156,13 @@ class Profiles
 
         if (isset(Router::$query['profileId']) && (int)Router::$query['profileId'] == 0) {
 
-            $result1 = self::$db->insert('profiles', [
+            $result1 = self::$db->insert(
+                'profiles', [
                     'name',
                     'surname',
                     'patronymic'
-                ], [
+                ],
+                [
                     Router::$query['name'][$profile_id],
                     Router::$query['surname'][$profile_id],
                     Router::$query['patronymic'][$profile_id]
@@ -194,16 +198,31 @@ class Profiles
 
             foreach ($emails as $key => $value) {
                 if ($value['id'] != 'add') {
-                    $result2 = self::$db->query('UPDATE emails SET email = :email, main = :main WHERE id = :id', [
-                        ['email', $value['email']],
-                        ['main', $value['main']],
-                        ['id', $value['id']],
-                    ]);
+                    $result2 = self::$db->query(
+                        'UPDATE emails SET email = :email, main = :main WHERE id = :id',
+                        [
+                            ['email', $value['email']],
+                            ['main', $value['main']],
+                            ['id', $value['id']],
+                        ]
+                    );
                     if ($result2[1] > 0) {
                         $ret++;
                     }
                 } else {
-                    $result2 = self::$db->insert('emails', ['email', 'main', 'profile_id'], [$value['email'], $value['main'], $profile_id]);
+                    $result2 = self::$db->insert(
+                        'emails',
+                        [
+                            'email',
+                            'main',
+                            'profile_id'
+                        ],
+                        [
+                            $value['email'],
+                            $value['main'],
+                            $profile_id
+                        ]
+                    );
                     if ($result2[0] > 0) {
                         $ret++;
                     }
@@ -234,17 +253,34 @@ class Profiles
 
             foreach ($phones as $key => $value) {
                 if ($value['id'] != 'add') {
-                    $result2 = self::$db->query('UPDATE phones SET phone = :phone, main = :main, phone_type_id = :phone_type_id  WHERE id = :id', [
-                        ['phone', $value['phone']],
-                        ['main', $value['main']],
-                        ['phone_type_id', $value['phone_type']],
-                        ['id', $value['id']],
-                    ]);
+                    $result2 = self::$db->query(
+                        'UPDATE phones SET phone = :phone, main = :main, phone_type_id = :phone_type_id  WHERE id = :id',
+                        [
+                            ['phone', $value['phone']],
+                            ['main', $value['main']],
+                            ['phone_type_id', $value['phone_type']],
+                            ['id', $value['id']],
+                        ]
+                    );
                     if ($result2[1] > 0) {
                         $ret++;
                     }
                 } else {
-                    $result2 = self::$db->insert('phones', ['phone', 'main', 'phone_type_id', 'profile_id'], [$value['phone'], $value['main'], $value['phone_type'], $profile_id]);
+                    $result2 = self::$db->insert(
+                        'phones',
+                        [
+                            'phone',
+                            'main',
+                            'phone_type_id',
+                            'profile_id'
+                        ],
+                        [
+                            $value['phone'],
+                            $value['main'],
+                            $value['phone_type'],
+                            $profile_id
+                        ]
+                    );
                     if ($result2[0] > 0) {
                         $ret++;
                     }

@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         {if !$is404}
-            <h1>Hello, world!</h1>
+            <h1>Контакты компании Х</h1>
         {/if}
         {$content}
     </div>

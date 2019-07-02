@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-31 10:31:50
+/* Smarty version 3.1.33, created on 2019-06-04 14:10:43
   from '/home/httpd/vhosts/djvov.ru/subdomains/test3/httpdocs/Engine/Views/Index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cf0bc46ea18b2_33082258',
+  'unifunc' => 'content_5cf63593167f43_23748942',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ea9447eed8cc6b5749643c8daaac429c808bd0ed' => 
     array (
       0 => '/home/httpd/vhosts/djvov.ru/subdomains/test3/httpdocs/Engine/Views/Index.tpl',
-      1 => 1559280710,
+      1 => 1559639414,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cf0bc46ea18b2_33082258 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cf63593167f43_23748942 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -36,7 +36,7 @@ function content_5cf0bc46ea18b2_33082258 (Smarty_Internal_Template $_smarty_tpl)
 <body>
     <div class="container">
         <?php if (!$_smarty_tpl->tpl_vars['is404']->value) {?>
-            <h1>Hello, world!</h1>
+            <h1>Контакты компании Х</h1>
         <?php }?>
         <?php echo $_smarty_tpl->tpl_vars['content']->value;?>
 

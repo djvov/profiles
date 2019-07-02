@@ -1,8 +1,8 @@
 <?php
 
-use djvov\Config;
 use djvov\Core\Model;
-use djvov\Core\Phones;
+use djvov\Core\PhoneTypes;
+use djvov\Core\PhoneType;
 use djvov\Core\Router;
 use djvov\Core\Singleton;
 
@@ -12,37 +12,56 @@ class ModelPhones extends Model
 
     public static function actionTypeEdit()
     {
-        $phone_types = [];
-        $Phones = Phones::getInstance();
+        $PhoneTypes = PhoneTypes::getInstance();
         $id = (int)Router::$query['id'];
         if ($id > 0) {
-            $phone_types = $Phones::getPhoneTypes($id);
+            $PhoneTypes::getPhoneTypes($id);
         }
         return [
-            'phone_types' => $phone_types,
+            'phone_types' => $PhoneTypes,
             'id' => $id,
         ];
     }
 
     public static function actionTypeList()
     {
-        $phone_types = [];
-        $Phones = Phones::getInstance();
-        $saved = $Phones::savePhoneType();
-        $phone_types = $Phones::getPhoneTypes();
+        $PhoneTypes = PhoneTypes::getInstance();
+        $saved = 0;
+        if (isset(Router::$query['typeId'])) {
+
+            $type_id = (int)Router::$query['typeId'];
+
+            if (isset(Router::$query['typeName'][$type_id])) {
+
+                $phoneType = new PhoneType;
+                $phoneType->setId($type_id);
+                $phoneType->setName(Router::$query['typeName'][$type_id]);
+                $saved = $phoneType->save();
+            }
+        }
+
+        $PhoneTypes::getPhoneTypes();
+
         return [
-            'phone_types' => $phone_types,
+            'phone_types' => $PhoneTypes,
             'saved' => $saved,
         ];
     }
 
     public static function actionDeletePhoneType()
     {
-        $Phones = Phones::getInstance();
-        $result = $Phones::deletePhoneType();
-        return [
-            'result' => $result,
-        ];
+        $type_id = (int)Router::$query['typeId'];
+
+        if ($type_id > 0) {
+
+            $phoneType = new PhoneType;
+            $phoneType->setId($type_id);
+            $result = $phoneType->delete();
+
+            return [
+                'result' => $result,
+            ];
+        }
     }
 
 }

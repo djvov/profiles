@@ -10,6 +10,7 @@
     </div>
 {/if}
 
+
 <table class="phones-table table table-striped table-hover">
     <thead>
         <tr>
@@ -19,12 +20,15 @@
         </tr>
     </thead>
     <tbody>
-        {foreach from=$phone_types item=phone_type}
+        {$phone_types->rewind()}
+        {while $phone_types->valid() }
+            {assign var="phone_type" value=$phone_types->current() }
             <tr>
-                <td>{$phone_type['name']}</td>
-                <td class="text-center td-edit"><a href="/Phones/TypeEdit/?id={$phone_type['id']}"><i class="fas fa-edit"></i></a></td>
-                <td class="text-center td-edit"><a href="javascript:void(0)" onclick="if (confirm('Вы уверены, что хотите удалить?')) deletePhoneType({$phone_type['id']}, event);"><i class="fas fa-times"></i></a></td>
+                <td>{$phone_type->getName()}</td>
+                <td class="text-center td-edit"><a href="/Phones/TypeEdit/?id={$phone_type->getId()}"><i class="fas fa-edit"></i></a></td>
+                <td class="text-center td-edit"><a href="javascript:void(0)" onclick="if (confirm('Вы уверены, что хотите удалить?')) deletePhoneType({$phone_type->getId()}, event);"><i class="fas fa-times"></i></a></td>
             </tr>
-        {/foreach}
+            {assign var="name1" value=$phone_types->next() }
+        {/while}
     </tbody>
 </table>

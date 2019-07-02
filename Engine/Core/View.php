@@ -3,7 +3,7 @@
 namespace djvov\Core;
 
 use djvov\Config;
-use \Smarty;
+use \SmartyBC;
 
 class View
 {
@@ -21,7 +21,7 @@ class View
     {
         if (file_exists($tpl_path)) {
             \djvov\Config::getInstance();
-            self::$smarty = new Smarty;
+            self::$smarty = new SmartyBC;
             self::$smarty->compile_dir = \djvov\Config::$dir_smarty
                 . DIRECTORY_SEPARATOR . 'templates_c'. DIRECTORY_SEPARATOR;
             self::$smarty->assign('content', '');

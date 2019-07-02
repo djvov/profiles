@@ -3,7 +3,10 @@
 use djvov\Config;
 use djvov\Core\Model;
 use djvov\Core\Profiles;
-use djvov\Core\Phones;
+use djvov\Core\Profile;
+use djvov\Core\PhoneTypes;
+use djvov\Core\Phone;
+use djvov\Core\Email;
 use djvov\Core\Router;
 use djvov\Core\Singleton;
 
@@ -13,27 +16,34 @@ class ModelProfiles extends Model
 
     public static function actionEdit()
     {
-        $profiles = [];
-        $Profiles = Profiles::getInstance();
-        $Phones = Phones::getInstance();
         Router::getInstance();
 
-        $phone_types = $Phones::getPhoneTypes();
+        $Profiles = Profiles::getInstance();
+        $PhoneTypes = PhoneTypes::getInstance();
+        $PhoneTypes::getPhoneTypes();
         $id = (int)Router::$query['id'];
+
         if ($id > 0) {
-            $profiles = $Profiles::getProfiles($id);
+            $Profiles::getProfiles($id);
         }
+
         return [
             'id' => $id,
-            'profiles' => $profiles,
-            'phone_types' => $phone_types,
+            'profiles' => $Profiles,
+            'phone_types' => $PhoneTypes,
         ];
     }
 
     public static function actionDeleteEmail()
     {
-        $Profiles = Profiles::getInstance();
-        $result = $Profiles::deleteEmail();
+        $email_id = (int)Router::$query['email_id'];
+        $result = 0;
+        if ($email_id > 0) {
+            $email = new Email;
+            $email->setId($email_id);
+            $result = $email->delete();
+        }
+
         return [
             'result' => $result,
         ];
@@ -41,8 +51,14 @@ class ModelProfiles extends Model
 
     public static function actionDeletePhone()
     {
-        $Profiles = Profiles::getInstance();
-        $result = $Profiles::deletePhone();
+        $phone_id = (int)Router::$query['phone_id'];
+        $result = 0;
+        if ($phone_id > 0) {
+            $phone = new Phone;
+            $phone->setId($phone_id);
+            $result = $phone->delete();
+        }
+
         return [
             'result' => $result,
         ];
@@ -50,8 +66,15 @@ class ModelProfiles extends Model
 
     public static function actionDeleteProfile()
     {
-        $Profiles = Profiles::getInstance();
-        $result = $Profiles::deletePhoneType();
+        $profile_id = (int)Router::$query['profileId'];
+        $result = 0;
+
+        if ($profile_id > 0) {
+            $profile = new Profile;
+            $profile->setId($profile_id);
+            $result = $profile->delete();
+        }
+
         return [
             'result' => $result,
         ];

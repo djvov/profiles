@@ -10,6 +10,7 @@
     </div>
 {/if}
 
+{$profiles->rewind()}
 <table class="profiles-table table table-striped table-hover">
     <thead>
         <tr>
@@ -23,27 +24,32 @@
         </tr>
     </thead>
     <tbody>
-        {foreach from=$profiles item=profile}
+        {while $profiles->valid() }
+            {assign var="profile" value=$profiles->current() }
+            {assign var="emails" value=$profile->getEmails() }
+            {assign var="phones" value=$profile->getPhones() }
             <tr>
-                <td class="td-fio">{$profile['surname']}</td>
-                <td class="td-fio">{$profile['name']}</td>
-                <td class="td-fio">{$profile['patronymic']}</td>
+                <td class="td-fio">{$profile->getSurname()}</td>
+                <td class="td-fio">{$profile->getName()}</td>
+                <td class="td-fio">{$profile->getPatronymic()}</td>
                 <td class="td-mail">
-                    {foreach from=$profile['emails'] item=email}
-                        {if $email['main']==1}<b>{/if}<a href="mailto:{$email['email']}">{$email['email']}</a>{if $email['main']==1}</b>{/if} <br>
+                    {foreach from=$emails item=email}
+                        {if $email->getMain() == 1}<b>{/if}<a href="mailto:{$email->getEmail()}">{$email->getEmail()}</a>{if $email->getMain() == 1}</b>{/if} <br>
                     {/foreach}
                 </td>
                 <td class="td-phone">
-                    {foreach from=$profile['phones'] item=phone}
-                        <div class="row {if $phone['main']==1}main-phone{/if}">
-                            <div class="col-7"><a href="tel:{$phone['phone']}">{$phone['phone']}</a></div>
-                            <div class="col-5 text-right">{if isset($phone['phone_type']['name'])}{$phone['phone_type']['name']}{/if}</div>
+                    {foreach from=$phones item=phone}
+                        <div class="row {if $phone->getMain() == 1}main-phone{/if}">
+                            <div class="col-7"><a href="tel:{$phone->getPhone()}">{$phone->getPhone()}</a></div>
+                            <div class="col-5 text-right">{$phone->getPhoneTypeName()}</div>
                         </div>
                     {/foreach}
                 </td>
-                <td class="text-center td-edit"><a href="/Profiles/Edit/?id={$profile['id']}"><i class="fas fa-edit"></i></a></td>
-                <td class="text-center td-edit"><a href="javascript:void(0)" onclick="if (confirm('Вы уверены, что хотите удалить профиль?')) deleteProfile({$profile['id']}, event);"><i class="fas fa-times"></i></a></td>
+                <td class="text-center td-edit"><a href="/Profiles/Edit/?id={$profile->getId()}"><i class="fas fa-edit"></i></a></td>
+                <td class="text-center td-edit"><a href="javascript:void(0)" onclick="if (confirm('Вы уверены, что хотите удалить профиль?')) deleteProfile({$profile->getId()}, event);"><i class="fas fa-times"></i></a></td>
             </tr>
-        {/foreach}
+                {assign var="name1" value=$profiles->next() }
+        {/while}
     </tbody>
 </table>
+
